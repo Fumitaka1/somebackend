@@ -1,24 +1,4 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Ruby on RailsをAPIモードで作成してフロントエンドと分離して開発してみたくなったので作成。
+フロントエンドにはreactを使用してSPAを構築するつもり。
+これで憎きNGINX.confからも開放される
+将来的にはネイティブアプリとの連携も経験してみたいと考えている。
