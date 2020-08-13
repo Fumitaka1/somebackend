@@ -33,6 +33,10 @@ gem "devise_token_auth"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
+  gem 'rspec-rails', '< 4.0.0'
+  gem 'guard-rspec', require: false
 end
 
 group :development do
