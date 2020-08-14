@@ -7,11 +7,15 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
 
+  has_many :posts
+
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i.freeze
   PASSWORD_REGEX = %r{\A[\w[\(\)\[\]\{\}\.\?\+\-\*\|\\/][~!@#$%^&=:;<>,]]+\Z}.freeze
 
   validates :email, format: { with: EMAIL_REGEX }
-  validates :password, format: { with: PASSWORD_REGEX }
+
+  # deviseによって作られたカラムに対して、独自のバリデーションを追加するとうまく動かない
+  # validates :password, format: { with: PASSWORD_REGEX }
 
   validates :email, length: { maximum: 250 }
 end
