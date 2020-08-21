@@ -1,4 +1,7 @@
 class Post < ApplicationRecord
+
+  self.per_page = 30
+
   belongs_to :user
 
   validates :content, presence: true

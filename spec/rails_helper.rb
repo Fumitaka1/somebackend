@@ -4,6 +4,8 @@ ENV['RAILS_ENV'] ||= 'test'
 
 require File.expand_path('../config/environment', __dir__)
 
+require_relative 'support/requests/authorization_spec_helper'
+
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
@@ -62,4 +64,8 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include FactoryBot::Syntax::Methods
+
+  # config.include Devise::Test::IntegrationHelpers, type: :request
+
+  config.include AuthorizationSpecHelper, type: :request
 end

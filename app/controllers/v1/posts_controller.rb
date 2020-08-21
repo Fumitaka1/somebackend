@@ -1,9 +1,11 @@
 module V1
   class PostsController < ApplicationController
+    before_action :authenticate_v1_user!, only: %i[create update destroy]
     before_action :set_post, only: %i[show update destroy]
+    before_action -> { check_permission(@post.user) }, only: %i[edit update destroy]
 
     def index
-      posts = Post.all
+      posts = Post.all.paginate(page: params[:page])
       render json: { status: 'SUCCESS', data: posts }
     end
 
@@ -18,12 +20,20 @@ module V1
     end
 
     def show
+      render json: { status: 'SUCCESS', data: @post }
     end
 
     def update
+      if @post.update_attributes(post_params)
+        render json: { status: 'SUCCESS', message: 'Updated the post', data: @post }
+      else
+        render json: { status: 'ERROR', message: 'Not updated', data: @post.errors }
+      end
     end
 
     def destroy
+      @post.destroy
+      render json: { status: 'SUCCESS', message: 'Deleted the post' }
     end
 
     private
