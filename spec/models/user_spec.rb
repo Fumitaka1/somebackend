@@ -80,35 +80,6 @@ RSpec.describe User, type: :model do
         end
       end
     end
-    describe 'password' do
-      context 'passwordのフォーマットが正しい場合' do
-        it '登録できる' do
-          valid_passwords = %w[
-            password
-            12345678
-            !#$%&()@
-          ]
-          valid_passwords.each do |valid_password|
-            user.password = user.password_confirmation = valid_password
-            expect(user).to be_valid
-          end
-        end
-      end
-      context 'passwordのフォーマットが間違っている場合' do
-        it '登録できない' do
-          invalid_passwords = %w[
-            あいうえおかき
-            "1'23456"
-            жзклмнптф
-          ]
-          invalid_passwords.each do |invalid_password|
-            user.password = user.password_confirmation = invalid_password
-            user.valid?
-            expect(user.errors.details[:password][0][:error]).to eq :invalid
-          end
-        end
-      end
-    end
   end
 
   describe 'length' do
