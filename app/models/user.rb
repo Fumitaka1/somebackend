@@ -7,10 +7,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i.freeze
-  PASSWORD_REGEX = %r{\A[\w[\(\)\[\]\{\}\.\?\+\-\*\|\\/][~!@#$%^&=:;<>,]]+\Z}.freeze
+  # PASSWORD_REGEX = %r{\A[\w[\(\)\[\]\{\}\.\?\+\-\*\|\\/][~!@#$%^&=:;<>,]]+\Z}.freeze
 
   validates :email, format: { with: EMAIL_REGEX }
 
