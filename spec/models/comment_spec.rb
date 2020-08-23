@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Comment, type: :model do
   let(:comment) { create(:comment) }
   describe 'presence' do
-    context 'コンテンツと実在するユーザーidがある場合' do
+    context 'コンテンツと実在するポストidと実在するユーザーidがある場合' do
       it '投稿できる' do
         expect(comment).to be_valid
       end
@@ -22,6 +22,14 @@ RSpec.describe Comment, type: :model do
         comment.post_id = ''
         comment.valid?
         expect(comment.errors.details[:post][0][:error]).to eq :blank
+      end
+    end
+
+    context 'ユーザーidが無い場合' do
+      it '投稿できない' do
+        comment.user_id = ''
+        comment.valid?
+        expect(comment.errors.details[:user][0][:error]).to eq :blank
       end
     end
   end
