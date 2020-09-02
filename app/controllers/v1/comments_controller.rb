@@ -2,7 +2,7 @@ module V1
   class CommentsController < ApplicationController
     before_action :authenticate_v1_user!, only: %i[create update destroy]
     before_action :set_comment, only: %i[show update destroy]
-    before_action -> { check_permission(@comment.user) }, only: %i[edit update destroy]
+    before_action -> { check_permission(@comment.user) }, only: %i[update destroy]
 
     def index
       comments = Comment.all.paginate(page: params[:page])
