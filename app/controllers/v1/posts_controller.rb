@@ -5,7 +5,7 @@ module V1
     before_action -> { check_permission(@post.user) }, only: %i[edit update destroy]
 
     def index
-      posts = Post.all.paginate(page: params[:page])
+      posts = Post.all.order(id: :desc).paginate(page: params[:page])
       render json: { status: 'SUCCESS', data: posts }
     end
 
